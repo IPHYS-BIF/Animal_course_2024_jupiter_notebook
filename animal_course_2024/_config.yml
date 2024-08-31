@@ -1,9 +1,10 @@
 # Book settings
 # Learn more at https://jupyterbook.org/customize/config.html
 
-title: Aninal Course 2024 - image analysis book
+title: Advanced Course on Preclinical Imaging 2024 - image analysis book
 author: IPHYS Bioimaging Facility 
-logo: "animal_course_2024\static\logo\BIF_logo.png"
+copyright: "2024"
+logo: "D:\\CZBI\\Kurzy a sluzebni cesty\\2024\\Animal\\Data_analysis\\Jupyter_book\\animal_course_2024\\static\\logo\\BIF_logo.png"
 
 # Force re-execution of notebooks on each build.
 # See https://jupyterbook.org/content/execute.html

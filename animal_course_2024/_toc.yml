@@ -4,6 +4,7 @@
 format: jb-book
 root: intro
 chapters:
-- file: markdown
-- file: notebooks
+- file: Project description
+- file: FLIM_notebooks
 - file: markdown-notebooks
+
