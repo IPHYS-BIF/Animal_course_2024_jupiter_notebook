@@ -1,53 +1,64 @@
----
-jupytext:
-  formats: md:myst
-  text_representation:
-    extension: .md
-    format_name: myst
-    format_version: 0.13
-    jupytext_version: 1.11.5
-kernelspec:
-  display_name: Python 3
-  language: python
-  name: python3
----
+# Fluorescence lifetime microscopy (FLIM)
 
-# Data analysis example
+Time correlated single photon counting (TCSPC) detects single photons of a periodic light signal and determines the times of the photons after the excitation pulses.
 
-Jupyter Book also lets you write text-based notebooks using MyST Markdown.
-See [the Notebooks with MyST Markdown documentation](https://jupyterbook.org/file-types/myst-notebooks.html) for more detailed instructions.
-This page shows off a notebook written in MyST Markdown.
+<div>
+<img src="./static/images/FLIM/flimprinciple.png" width="650"/>
+</div>
 
-## An example cell
+## FLIM theory
+### Fitting a model to the decay curve approach
 
-With MyST Markdown, you can define code cells with a directive like so:
+A fluorophore decays with time according to the relation:
 
-```{code-cell}
-print(2 + 2)
-```
+$$
+I_{(t)} = A_0e^{-t/\tau_0}
+$$
 
-When your book is built, the contents of any `{code-cell}` blocks will be
-executed with your default Jupyter kernel, and their outputs will be displayed
-in-line with the rest of your content.
+where $\tau_0$ is the fluorescence lifetime and $A_0$ is the amplitude.
 
-```{seealso}
-Jupyter Book uses [Jupytext](https://jupytext.readthedocs.io/en/latest/) to convert text-based files to notebooks, and can support [many other text-based notebook files](https://jupyterbook.org/file-types/jupytext.html).
-```
+To model more complex kinetics of fluorophores, the decay is usually model by a sum of exponentials:
 
-## Create a notebook with MyST Markdown
+$$
+I_{(t)} = \sum_{i=1}^n A_ie^{-t/\tau_i}
+$$
 
-MyST Markdown notebooks are defined by two things:
+where $\tau_0$ is the fluorescence lifetime and $A_0$ is the amplitude.
 
-1. YAML metadata that is needed to understand if / how it should convert text files to notebooks (including information about the kernel needed).
-   See the YAML at the top of this page for example.
-2. The presence of `{code-cell}` directives, which will be executed with your book.
+The model fit can be done in specialized SW or by scripting.
 
-That's all that is needed to get started!
+<div>
+<img src="./static/images/FLIM/flim_fit.png" width="650"/>
+</div>
 
-## Quickly add YAML metadata for MyST Notebooks
+### Phasor plot: the model-free approach
 
-If you have a markdown file and you'd like to quickly add YAML metadata to it, so that Jupyter Book will treat it as a MyST Markdown Notebook, run the following command:
+Representation of the fluorescence lifetime using the phasor plot model-free aproach. The phasor is a graphical representation of the transformed raw data.
 
-```
-jupyter-book myst init path/to/markdownfile.md
-```
+The single decay component fluorophore sits on the universal circle and the position on the circle reflects the lifetime $\tau_0$ in respect with the laser repetition rate $\omega$.
+
+The two phasors $g$ and $s$ are obtained through the transformation as:
+
+$$
+g_{(x,y)}(\omega) = \frac{\int I_{x,y}(t)\cos(\omega t)\,dt\,}{\int I_{x,y}(t)\,dt\,}
+$$
+
+$$
+s_{(x,y)}(\omega) = \frac{\int I_{x,y}(t)\sin(\omega t)\,dt\,}{\int I_{x,y}(t)\,dt\,}
+$$
+
+The graphic represantation of the phasor is the universal semicircle with a point cloud of transformed decayes.
+
+<div>
+<img src="./static/images/FLIM/phasor_single.png" alt="Drawing" style="width: 450px;"/>
+</div>
+
+The complex micture of fluorescence specimen will be represented as a linear combination of those specimen in the universal semicircle.
+
+<div>
+<img src="./static/images/FLIM/multiple_components.jpg" width="450"/>
+</div>
+
+## Code blocks for FLIM data phasor analysis
+
+The B&H FLIM data can be analysed in Python using multiple libraries such as numpy, sdtfile and others. The practical examples are on the next pages.

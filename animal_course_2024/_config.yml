@@ -31,3 +31,8 @@ repository:
 html:
   use_issues_button: true
   use_repository_button: true
+
+# Add the copy button to all code cells
+# See https://jupyterbook.org/customize/config.html#add-a-copy-button-to-all-code-cells 
+sphinx:
+  copybutton: True
